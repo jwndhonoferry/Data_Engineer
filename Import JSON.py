@@ -41,6 +41,8 @@ except ValueError:
 # Introduction to APIs
 # =============================================================================
 api_url = "https://api.yelp.com/v3/businesses/search"
+#Api Key pada header harus diganti dengan key authorization user
+#Kode ini tidak akan berjalan
 api_key = "a"
 params = {"term" : "cafe", "location" : "NYC"}
 headers = {"Authorization": "Bearer {}".format(api_key)}
@@ -58,6 +60,28 @@ cafes = pd.DataFrame(data["businesses"])
 # View the data's dtypes
 print(cafes.dtypes)
 print(cafes.head())
+
+# =============================================================================
+# Working with Nested JSON
+# =============================================================================
+from pandas.io.json import json_normalize
+
+#set params, headers, response and isolate response.json
+
+caf = json_normalize(data["businesses"], sep="_")
+
+flat_cafes = json_normalize(data["businesses"],
+                            sep="_",
+                    		record_path="categories",
+                    		meta=["name", 
+                                  "alias",  
+                                  "rating",
+                          		  ["coordinates", "latitude"], 
+                          		  ["coordinates", "longitude"]],
+                    		meta_prefix="biz_")
+#Jadi businesses adalah attributes yang di dalamnya terdapat banyak attribute
+# termasuk categories, categories berupa attribut yang di dalamnya terdapat list dictionary
+#meta name, alias dan rating 
 
 
 
