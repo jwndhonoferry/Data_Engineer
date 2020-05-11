@@ -1,3 +1,5 @@
-# Data_Engineer
-This repository is an excercises from data camp in Data Engineer Career Tracks.
-The code program is my learning outcomes.
+# Streamlined Data Ingestion with Pandas
+This repo is about 
+  -how to acces or get data from flatfile (ex: .csv), databases, API, JSON file with pandas.
+  -how to merge dataframe
+  -how to works with nested JSON
